@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Thais de Freitas | Advocacia para Mulheres e Mães</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary:      "#0D4D4D",
+          "primary-deep":"#003535",
+          gold:         "#C5934C",
+          "gold-light":  "#e8c48a",
+          "surface":     "#f9f9f9",
+          "surface-low": "#f3f4f3",
+          "surface-high":"#e8e8e8",
+          "on-surface":  "#1a1c1c",
+          "on-surface-muted":"#404848",
+          "outline-v":   "#bfc8c8",
+        },
+        fontFamily: {
+          serif: ["Noto Serif","Georgia","serif"],
+          sans:  ["Inter","system-ui","sans-serif"],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  *,*::before,*::after{box-sizing:border-box}
+  :root{
+    --primary:#0D4D4D;
+    --primary-deep:#003535;
+    --gold:#C5934C;
+    --gold-light:#e8c48a;
+    --surface:#f9f9f9;
+    --surface-low:#f3f4f3;
+    --on-surface:#1a1c1c;
+    --on-muted:#404848;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',sans-serif;color:var(--on-surface);background:var(--surface);overflow-x:hidden}
+  .font-serif{font-family:'Noto Serif',Georgia,serif}
+
+  /* Signature gradient hero bg */
+  .hero-bg{background:linear-gradient(145deg,#0D4D4D 0%,#0a3d3d 55%,#072e2e 100%)}
+
+  /* Process section gradient */
+  .process-bg{background:linear-gradient(160deg,#0D4D4D 0%,#0a3838 100%)}
+
+  /* Glass effect */
+  .glass{
+    background:rgba(249,249,249,0.82);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+  }
+  .glass-dark{
+    background:rgba(13,77,77,0.18);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+  }
+
+  /* Gold accent left border for feature cards */
+  .card-gold-accent{border-left:4px solid var(--gold);border-radius:0 0.5rem 0.5rem 0}
+
+  /* Ambient shadow */
+  .shadow-ambient{box-shadow:0 20px 60px rgba(13,77,77,0.08),0 4px 16px rgba(13,77,77,0.04)}
+  .shadow-ambient-sm{box-shadow:0 8px 32px rgba(13,77,77,0.06)}
+
+  /* Scroll reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+  .reveal.visible{opacity:1;transform:none}
+  .reveal-left{opacity:0;transform:translateX(-32px);transition:opacity 0.8s ease,transform 0.8s ease}
+  .reveal-left.visible{opacity:1;transform:none}
+  .reveal-right{opacity:0;transform:translateX(32px);transition:opacity 0.8s ease,transform 0.8s ease}
+  .reveal-right.visible{opacity:1;transform:none}
+
+  /* Stagger children */
+  .stagger > *{opacity:0;transform:translateY(20px);transition:opacity 0.55s ease,transform 0.55s ease}
+  .stagger.visible > *:nth-child(1){opacity:1;transform:none;transition-delay:0s}
+  .stagger.visible > *:nth-child(2){opacity:1;transform:none;transition-delay:0.1s}
+  .stagger.visible > *:nth-child(3){opacity:1;transform:none;transition-delay:0.2s}
+  .stagger.visible > *:nth-child(4){opacity:1;transform:none;transition-delay:0.3s}
+
+  /* Nav underline active */
+  .nav-active{
+    border-bottom:1.5px solid var(--gold);
+    color:var(--gold)!important;
+    padding-bottom:2px;
+  }
+
+  /* Bio section texture */
+  .bio-bg{background:var(--surface-low)}
+
+  /* Portrait frame — asymmetric clip */
+  .portrait-wrap{
+    position:relative;
+    display:inline-block;
+  }
+  .portrait-wrap::before{
+    content:'';
+    position:absolute;
+    top:-12px;left:-12px;
+    width:60%;height:60%;
+    border:2px solid var(--gold);
+    border-radius:0.5rem;
+    opacity:0.55;
+    z-index:0;
+  }
+  .portrait-wrap::after{
+    content:'';
+    position:absolute;
+    bottom:-10px;right:-10px;
+    width:45%;height:45%;
+    background:rgba(197,147,76,0.12);
+    border-radius:0.75rem;
+    z-index:0;
+  }
+  .portrait-wrap img{position:relative;z-index:1}
+
+  /* Testimonial card */
+  .testimonial-card{
+    background:white;
+    border-radius:1rem;
+    padding:2rem;
+  }
+
+  /* WhatsApp floating */
+  .float-wa{
+    position:fixed;
+    bottom:2rem;right:2rem;
+    z-index:60;
+  }
+  .float-wa a{
+    display:flex;align-items:center;gap:0.75rem;
+    background:rgba(249,249,249,0.85);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid rgba(191,200,200,0.18);
+    padding:0.5rem 1.25rem 0.5rem 0.5rem;
+    border-radius:9999px;
+    box-shadow:0 8px 32px rgba(13,77,77,0.12);
+    text-decoration:none;
+    transition:transform 0.25s ease,box-shadow 0.25s ease;
+  }
+  .float-wa a:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(13,77,77,0.16)}
+  .float-wa .wa-icon{
+    width:3rem;height:3rem;
+    background:#25D366;
+    border-radius:9999px;
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .float-wa .wa-icon span{color:white;font-size:1.25rem}
+
+  /* Mobile nav */
+  #mobile-menu{display:none}
+  #mobile-menu.open{display:flex}
+
+  /* Steps connector line */
+  .step-connector{flex:1;height:1px;background:rgba(255,255,255,0.15);margin:0 0.5rem;margin-top:2rem;display:block}
+  @media(max-width:768px){.step-connector{display:none}}
+
+  /* Image mosaic */
+  .mosaic-img{
+    object-fit:cover;
+    width:100%;height:100%;
+    transition:transform 0.6s ease;
+    border-radius:0.75rem;
+    display:block;
+  }
+  .mosaic-wrap:hover .mosaic-img{transform:scale(1.04)}
+  .mosaic-wrap{overflow:hidden;border-radius:0.75rem}
+
+  /* CTA section bg */
+  .cta-section-bg{
+    background: var(--surface-low);
+  }
+
+  @media(max-width:640px){
+    .float-wa .wa-label{display:none}
+    .float-wa a{padding:0.5rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     TOP NAV
+═══════════════════════════════════════ -->
+<nav class="fixed top-0 w-full z-50 glass shadow-ambient-sm h-20" id="topnav">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 h-full flex justify-between items-center">
+    <a href="#" class="font-serif text-xl font-bold tracking-tight" style="color:var(--primary)">
+      Thais de Freitas
+    </a>
+
+    <!-- Desktop links -->
+    <div class="hidden md:flex gap-8 items-center">
+      <a href="#especialidades" class="font-serif text-sm tracking-wide nav-active">Especialidades</a>
+      <a href="#sobre" class="font-serif text-sm tracking-wide hover:text-[#C5934C] transition-colors" style="color:var(--primary)">Sobre Mim</a>
+      <a href="#processo" class="font-serif text-sm tracking-wide hover:text-[#C5934C] transition-colors" style="color:var(--primary)">Como Funciona</a>
+      <a href="#contato" class="font-serif text-sm tracking-wide hover:text-[#C5934C] transition-colors" style="color:var(--primary)">Contato</a>
+      <a href="https://wa.me/5531988210020" target="_blank"
+         class="ml-2 font-sans text-sm font-medium px-6 py-2.5 rounded-lg text-white transition-all hover:scale-95 duration-200"
+         style="background:var(--primary)">
+        Agendar Consulta
+      </a>
+    </div>
+
+    <!-- Mobile toggle -->
+    <button class="md:hidden p-2 rounded-lg" style="color:var(--primary)" onclick="toggleMobile()" aria-label="Menu">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="2" y1="6" x2="20" y2="6"/><line x1="2" y1="11" x2="20" y2="11"/><line x1="2" y1="16" x2="20" y2="16"/></svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="flex-col glass border-t border-[rgba(191,200,200,0.2)] px-6 py-5 gap-4 md:hidden">
+    <a href="#especialidades" class="font-serif text-sm" style="color:var(--primary)" onclick="toggleMobile()">Especialidades</a>
+    <a href="#sobre" class="font-serif text-sm" style="color:var(--primary)" onclick="toggleMobile()">Sobre Mim</a>
+    <a href="#processo" class="font-serif text-sm" style="color:var(--primary)" onclick="toggleMobile()">Como Funciona</a>
+    <a href="#contato" class="font-serif text-sm" style="color:var(--primary)" onclick="toggleMobile()">Contato</a>
+    <a href="https://wa.me/5531988210020" class="font-sans text-sm font-medium px-5 py-3 rounded-lg text-white text-center" style="background:var(--primary)">Agendar Consulta</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<header class="hero-bg relative pt-32 pb-0 md:pt-44 md:pb-0 overflow-hidden min-h-[92vh] flex items-center">
+
+  <!-- Decorative texture circle -->
+  <div style="position:absolute;top:-80px;right:-80px;width:500px;height:500px;border:1px solid rgba(197,147,76,0.12);border-radius:50%;pointer-events:none"></div>
+  <div style="position:absolute;top:40px;right:40px;width:300px;height:300px;border:1px solid rgba(197,147,76,0.08);border-radius:50%;pointer-events:none"></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-10 w-full grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-0 items-end pb-0">
+
+    <!-- Text col -->
+    <div class="md:col-span-7 pb-16 md:pb-24 z-10 reveal-left visible">
+      <span class="font-sans uppercase tracking-[0.22em] text-xs font-semibold mb-6 block" style="color:var(--gold)">
+        Advocacia Familiar Humanizada
+      </span>
+
+      <h1 class="font-serif leading-[1.1] mb-8" style="font-size:clamp(2.4rem,6vw,4.2rem);color:white">
+        Proteção e Amparo<br/>
+        Jurídico para a<br/>
+        <em style="color:var(--gold);font-style:italic">Mulher e a Mãe</em>
+      </h1>
+
+      <p class="font-sans text-lg leading-relaxed mb-10 max-w-lg" style="color:rgba(255,255,255,0.72)">
+        Especialista em Divórcio, Pensão Alimentícia e Guarda. 
+        Atendimento online em todo o Brasil com a segurança e o sigilo que o seu momento exige.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4">
+        <a href="https://wa.me/5531988210020" target="_blank"
+           class="font-sans font-semibold text-base px-8 py-4 rounded-lg text-white text-center transition-all duration-200 hover:-translate-y-1"
+           style="background:var(--gold);box-shadow:0 8px 24px rgba(197,147,76,0.35)">
+          Agendar Consulta via WhatsApp
+        </a>
+        <a href="#especialidades"
+           class="font-sans font-semibold text-base px-8 py-4 rounded-lg text-center transition-all duration-200 hover:opacity-90"
+           style="background:rgba(255,255,255,0.1);color:white;border:1px solid rgba(255,255,255,0.18)">
+          Conhecer Especialidades
+        </a>
+      </div>
+
+      <!-- OAB badge -->
+      <p class="font-sans text-xs mt-8" style="color:rgba(255,255,255,0.38);letter-spacing:0.12em;text-transform:uppercase">
+        OAB · Thais de Freitas MG · Ipatinga, Minas Gerais
+      </p>
+    </div>
+
+    <!-- Portrait col — bleeds at bottom -->
+    <div class="md:col-span-5 flex justify-center md:justify-end items-end self-end">
+      <div style="position:relative;width:100%;max-width:400px;">
+        <!-- Gold ring decoration -->
+        <div style="position:absolute;top:-20px;left:-20px;width:100px;height:100px;border:2px solid rgba(197,147,76,0.35);border-radius:50%"></div>
+
+        <img
+          src="572373083_18048632108670929_6645163876588273323_n.jpg"
+          alt="Thais de Freitas — Advogada de Família"
+          style="width:100%;max-height:580px;object-fit:cover;object-position:top center;border-radius:1rem 1rem 0 0;display:block;position:relative;z-index:2"
+          onerror="this.style.background='rgba(255,255,255,0.08)';this.style.minHeight='480px';this.removeAttribute('src')"
+        />
+
+        <!-- Name card floating -->
+        <div class="glass-dark"
+             style="position:absolute;bottom:2rem;left:-2rem;z-index:10;padding:1rem 1.4rem;border-radius:0.75rem;border:1px solid rgba(197,147,76,0.2);box-shadow:0 12px 40px rgba(0,0,0,0.25)">
+          <p class="font-serif text-lg font-semibold" style="color:white">Thais de Freitas</p>
+          <p class="font-sans text-xs" style="color:var(--gold);letter-spacing:0.12em;text-transform:uppercase;margin-top:3px">Advogada de Família · OAB MG</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     ESPECIALIDADES
+═══════════════════════════════════════ -->
+<section id="especialidades" class="py-28 md:py-36" style="background:var(--surface)">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+
+    <div class="text-center mb-20 reveal">
+      <span class="font-sans uppercase tracking-[0.22em] text-xs font-semibold block mb-4" style="color:var(--gold)">Áreas de Atuação</span>
+      <h2 class="font-serif leading-tight" style="font-size:clamp(2rem,4.5vw,3rem);color:var(--primary)">
+        Especialidades
+      </h2>
+      <div style="width:48px;height:2px;background:var(--gold);margin:1.5rem auto 0"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger" id="cards-grid">
+
+      <!-- Card 1 -->
+      <div class="card-gold-accent shadow-ambient-sm p-8 bg-white" style="border-radius:0 1rem 1rem 0">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(13,77,77,0.07)">
+          <span class="material-symbols-outlined" style="color:var(--primary);font-size:1.4rem;font-variation-settings:'FILL' 0,'wght' 300">family_restroom</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold mb-3" style="color:var(--primary)">Divórcio e Partilha</h3>
+        <p class="font-sans text-base leading-relaxed" style="color:var(--on-muted)">
+          Assessoria completa em divórcios consensuais ou litigiosos, focando na proteção do seu patrimônio e bem-estar emocional. Você não precisa enfrentar isso sozinha.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="card-gold-accent shadow-ambient-sm p-8 bg-white" style="border-radius:0 1rem 1rem 0">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(13,77,77,0.07)">
+          <span class="material-symbols-outlined" style="color:var(--primary);font-size:1.4rem;font-variation-settings:'FILL' 0,'wght' 300">child_care</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold mb-3" style="color:var(--primary)">Guarda e Visitas</h3>
+        <p class="font-sans text-base leading-relaxed" style="color:var(--on-muted)">
+          Defesa intransigente do melhor interesse da criança, buscando acordos que preservem a rotina e os laços afetivos. A relação da mãe com seus filhos é sagrada.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="card-gold-accent shadow-ambient-sm p-8 bg-white" style="border-radius:0 1rem 1rem 0">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style="background:rgba(13,77,77,0.07)">
+          <span class="material-symbols-outlined" style="color:var(--primary);font-size:1.4rem;font-variation-settings:'FILL' 0,'wght' 300">account_balance</span>
+        </div>
+        <h3 class="font-serif text-xl font-semibold mb-3" style="color:var(--primary)">Pensão Alimentícia</h3>
+        <p class="font-sans text-base leading-relaxed" style="color:var(--on-muted)">
+          Cálculo justo e acompanhamento rigoroso para garantir o sustento e as necessidades essenciais dos seus filhos. Seu direito, nossa missão.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SOBRE / BIO — asymmetric layout
+═══════════════════════════════════════ -->
+<section id="sobre" style="background:var(--surface-low)" class="py-28 md:py-36 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+
+    <!-- Portrait mosaic left -->
+    <div class="lg:col-span-5 reveal-left" id="bio-img">
+      <div class="portrait-wrap">
+        <img
+          src="572373083_18048632108670929_6645163876588273323_n.jpg"
+          alt="Thais de Freitas"
+          style="width:100%;max-width:420px;height:520px;object-fit:cover;object-position:top center;border-radius:1rem;display:block;position:relative;z-index:1"
+          onerror="this.style.background:'#e8e8e8';this.style.minHeight='420px';this.removeAttribute('src')"
+        />
+      </div>
+    </div>
+
+    <!-- Bio text right -->
+    <div class="lg:col-span-7 reveal-right" id="bio-text">
+      <span class="font-sans uppercase tracking-[0.22em] text-xs font-semibold block mb-4" style="color:var(--gold)">Sobre Mim</span>
+      <h2 class="font-serif leading-tight mb-8" style="font-size:clamp(1.9rem,4vw,2.9rem);color:var(--primary)">
+        Uma advogada que<br/><em style="font-style:italic">entende por dentro</em>
+      </h2>
+      <div style="width:40px;height:2px;background:var(--gold);margin-bottom:2rem"></div>
+
+      <div class="space-y-5 font-sans text-base leading-relaxed" style="color:var(--on-muted)">
+        <p>
+          Sou Thais, advogada há uma década e mãe de três. Minha trajetória no Direito de Família começou muito antes da graduação; ela nasceu da minha própria busca por justiça.
+        </p>
+        <p>
+          Após superar um relacionamento marcado por desafios e lutar sozinha pela segurança e pelos direitos da minha primogênita, transformei minha vivência em missão. Formada aos 31 anos, hoje dedico minha carreira a garantir que outras mulheres não precisem enfrentar o sistema desassistidas.
+        </p>
+        <p>
+          Unindo a força de quem sobreviveu à técnica de quem se especializou, ofereço em Ipatinga e em todo o Brasil uma advocacia humanizada, pautada no acolhimento que eu mesma um dia precisei encontrar.
+        </p>
+      </div>
+
+      <!-- Stats -->
+      <div class="flex items-center gap-10 mt-12">
+        <div>
+          <p class="font-serif text-4xl font-bold" style="color:var(--primary)">10+</p>
+          <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color:var(--on-muted)">Anos de Experiência</p>
+        </div>
+        <div style="width:1px;height:48px;background:var(--outline-v,#bfc8c8)"></div>
+        <div>
+          <p class="font-serif text-4xl font-bold" style="color:var(--primary)">500+</p>
+          <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color:var(--on-muted)">Famílias Atendidas</p>
+        </div>
+        <div style="width:1px;height:48px;background:var(--outline-v,#bfc8c8)"></div>
+        <div>
+          <p class="font-serif text-4xl font-bold" style="color:var(--primary)">30k+</p>
+          <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color:var(--on-muted)">Seguidoras</p>
+        </div>
+      </div>
+
+      <a href="https://wa.me/5531988210020" target="_blank"
+         class="inline-block mt-10 font-sans font-semibold text-sm px-8 py-4 rounded-lg text-white transition-all hover:-translate-y-1 duration-200"
+         style="background:var(--primary);box-shadow:0 8px 24px rgba(13,77,77,0.18)">
+        Conversar com Thais
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     RECONHECIMENTO / MOSAIC
+═══════════════════════════════════════ -->
+<section class="py-28 md:py-36 overflow-hidden" style="background:var(--surface)">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <div class="reveal-left" id="trust-text">
+        <span class="font-sans uppercase tracking-[0.22em] text-xs font-semibold block mb-4" style="color:var(--gold)">Presença Digital</span>
+        <h2 class="font-serif leading-tight mb-6" style="font-size:clamp(1.9rem,4vw,2.9rem);color:var(--primary)">
+          Reconhecimento e<br/>Confiança Digital
+        </h2>
+        <div style="width:40px;height:2px;background:var(--gold);margin-bottom:2rem"></div>
+        <p class="font-sans text-base leading-relaxed mb-10" style="color:var(--on-muted)">
+          Mais do que advocacia, construímos uma rede de apoio. São mais de 30 mil mulheres impactadas diariamente com orientações jurídicas claras e seguras através das nossas redes sociais.
+        </p>
+        <div class="flex items-center gap-8">
+          <div>
+            <p class="font-serif text-4xl font-bold" style="color:var(--gold)">30k+</p>
+            <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color:var(--on-muted)">Seguidoras no Instagram</p>
+          </div>
+          <div style="width:1px;height:48px;background:var(--outline-v,#bfc8c8)"></div>
+          <div>
+            <p class="font-serif text-4xl font-bold" style="color:var(--gold)">500+</p>
+            <p class="font-sans text-xs uppercase tracking-widest mt-1" style="color:var(--on-muted)">Famílias Atendidas</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image mosaic -->
+      <div class="grid grid-cols-2 gap-4 reveal-right" id="mosaic">
+        <div class="space-y-4 pt-10">
+          <div class="mosaic-wrap" style="aspect-ratio:1">
+            <img class="mosaic-img"
+                 src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=400&fit=crop&q=80"
+                 alt="Documentos jurídicos sobre mesa de escritório com luz natural suave"
+                 onerror="this.parentElement.style.background='#e2e2e2'"
+            />
+          </div>
+          <div class="mosaic-wrap" style="aspect-ratio:1">
+            <img class="mosaic-img"
+                 src="https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?w=400&h=400&fit=crop&q=80"
+                 alt="Detalhe da estátua da Justiça"
+                 onerror="this.parentElement.style.background='#e2e2e2'"
+            />
+          </div>
+        </div>
+        <div class="space-y-4">
+          <div class="mosaic-wrap" style="aspect-ratio:4/5">
+            <img class="mosaic-img"
+                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=500&fit=crop&q=80"
+                 alt="Aperto de mão profissional simbolizando confiança"
+                 onerror="this.parentElement.style.background='#e2e2e2'"
+            />
+          </div>
+          <div class="mosaic-wrap" style="aspect-ratio:1">
+            <img class="mosaic-img"
+                 src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=400&fit=crop&q=80"
+                 alt="Mesa de trabalho com laptop e cadernos"
+                 onerror="this.parentElement.style.background='#e2e2e2'"
+            />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     PROCESSO / HOW IT WORKS
+═══════════════════════════════════════ -->
+<section id="processo" class="process-bg py-28 md:py-36">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+
+    <div class="text-center mb-20 reveal">
+      <span class="font-sans uppercase tracking-[0.22em] text-xs font-semibold block mb-4" style="color:var(--gold)">Atendimento Online</span>
+      <h2 class="font-serif" style="font-size:clamp(1.9rem,4vw,2.9rem);color:white">Consultoria Jurídica Digital</h2>
+      <p class="font-sans mt-4 text-base" style="color:rgba(255,255,255,0.6)">Justiça sem burocracia, onde quer que você esteja.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-0 stagger" id="steps">
+
+      <!-- Step 1 -->
+      <div class="flex flex-col items-center text-center px-4 mb-10 md:mb-0">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6" style="background:rgba(197,147,76,0.15);border:1px solid rgba(197,147,76,0.3)">
+          <span class="material-symbols-outlined" style="color:var(--gold);font-size:1.4rem;font-variation-settings:'FILL' 0,'wght' 300">forum</span>
+        </div>
+        <span class="font-sans text-xs uppercase tracking-widest mb-3" style="color:var(--gold)">01</span>
+        <h4 class="font-serif text-lg font-semibold mb-3" style="color:white">Contato Inicial</h4>
+        <p class="font-sans text-sm leading-relaxed" style="color:rgba(255,255,255,0.58)">Você relata seu caso via WhatsApp de forma rápida e segura.</p>
+      </div>
+
+      <div class="step-connector hidden md:block" style="margin-top:2rem"></div>
+
+      <!-- Step 2 -->
+      <div class="flex flex-col items-center text-center px-4 mb-10 md:mb-0">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6" style="background:rgba(197,147,76,0.15);border:1px solid rgba(197,147,76,0.3)">
+          <span class="material-symbols-outlined" style="color:var(--gold);font-size:1.4rem;font-variation-settings:'FILL' 0,'wght' 300">event_note</span>
+        </div>
+        <span class="font-sans text-xs uppercase tracking-widest mb-3" style="color:var(--gold)">02</span>
+        <h4 class="font-serif text-lg font-semibold mb-3" style="color:white">Agendamento</h4>
+        <p class="font-sans text-sm leading-relaxed" style="color:rgba(255,255,255,0.58)">Marcamos uma vídeo-chamada para uma análise detalhada do seu caso.</p>
+      </div>
+
+      <div class="step-connector hidden md:block" style="margin-top:2rem"></div>
+
+      <!-- Step 3 -->
+      <div class="flex flex-col items-center text-center px-4 mb-10 md:mb-0">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6" style="background:rgba(197,147,76,0.15);border:1px solid rgba(197,147,76,0.3)">
+          <span class="material-symbols-outlined" style="color:var(--gold);font-size:1.4rem;font-variation-settings:'FILL' 0,'wght' 300">gavel</span>
+        </div>
+        <span class="font-sans text-xs uppercase tracking-widest mb-3" style="color:var(--gold)">03</span>
+        <h4 class="font-serif text-lg font-semibold mb-3" style="color:white">Estratégia</h4>
+        <p class="font-sans text-sm leading-relaxed" style="color:rgba(255,255,255,0.58)">Definimos a melhor rota jurídica para proteger seus direitos.</p>
+      </div>
+
+      <div class="step-connector hidden md:block" style="margin-top:2rem"></div>
+
+      <!-- Step 4 -->
+      <div class="flex flex-col items-center text-center px-4">
+        <div class="w-16 h-16 rounded-full flex items-center justify-center mb-6" style="background:rgba(197,147,76,0.15);border:1px solid rgba(197,147,76,0.3)">
+          <span class="material-symbols-outlined" style="color:var(--gold);font-size:1.4rem;font-variation-settings:'FILL' 0,'wght' 300">done_all</span>
+        </div>
+        <span class="font-sans text-xs uppercase tracking-widest mb-3" style="color:var(--gold)">04</span>
+        <h4 class="font-serif text-lg font-semibold mb-3" style="color:white">Execução</h4>
+        <p class="font-sans text-sm leading-relaxed" style="color:rgba(255,255,255,0.58)">Cuidamos de todo o processo judicial ou extrajudicial.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     DEPOIMENTOS
+═══════════════════════════════════════ -->
+<section id="depoimentos" class="py-28 md:py-36" style="background:var(--surface-low)">
+  <div class="max-w-7xl mx-auto px-6 md:px-10">
+
+    <div class="text-center mb-20 reveal">
+      <span class="font-sans uppercase tracking-[0.22em] text-xs font-semibold block mb-4" style="color:var(--gold)">Depoimentos</span>
+      <h2 class="font-serif leading-tight" style="font-size:clamp(1.9rem,4vw,2.9rem);color:var(--primary)">
+        O que nossas clientes dizem
+      </h2>
+      <div style="width:48px;height:2px;background:var(--gold);margin:1.5rem auto 0"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger" id="testimonials">
+
+      <div class="testimonial-card shadow-ambient-sm">
+        <div style="color:var(--gold);font-size:1.5rem;margin-bottom:1rem;letter-spacing:0.05em">✦ ✦ ✦ ✦ ✦</div>
+        <p class="font-sans text-base leading-relaxed mb-6" style="color:var(--on-muted)">
+          "A Thais foi muito mais que minha advogada. Ela entendeu tudo o que eu estava passando e me guiou com clareza e humanidade em cada etapa do divórcio."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-serif font-bold text-sm text-white" style="background:var(--primary)">M</div>
+          <div>
+            <p class="font-sans font-semibold text-sm" style="color:var(--on-surface)">Mariana S.</p>
+            <p class="font-sans text-xs" style="color:var(--on-muted)">Belo Horizonte, MG</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card shadow-ambient-sm">
+        <div style="color:var(--gold);font-size:1.5rem;margin-bottom:1rem;letter-spacing:0.05em">✦ ✦ ✦ ✦ ✦</div>
+        <p class="font-sans text-base leading-relaxed mb-6" style="color:var(--on-muted)">
+          "Consegui a guarda das minhas filhas e a pensão justa que precisávamos. A Thais lutou por nós com uma dedicação que eu nunca vou esquecer."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-serif font-bold text-sm text-white" style="background:var(--primary)">C</div>
+          <div>
+            <p class="font-sans font-semibold text-sm" style="color:var(--on-surface)">Carolina R.</p>
+            <p class="font-sans text-xs" style="color:var(--on-muted)">São Paulo, SP</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card shadow-ambient-sm">
+        <div style="color:var(--gold);font-size:1.5rem;margin-bottom:1rem;letter-spacing:0.05em">✦ ✦ ✦ ✦ ✦</div>
+        <p class="font-sans text-base leading-relaxed mb-6" style="color:var(--on-muted)">
+          "O atendimento online foi incrível. Mesmo morando em outra cidade, me senti completamente amparada durante todo o processo."
+        </p>
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full flex items-center justify-center font-serif font-bold text-sm text-white" style="background:var(--primary)">A</div>
+          <div>
+            <p class="font-sans font-semibold text-sm" style="color:var(--on-surface)">Ana Paula T.</p>
+            <p class="font-sans text-xs" style="color:var(--on-muted)">Recife, PE</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     CTA
+═══════════════════════════════════════ -->
+<section id="contato" class="py-28 md:py-36 cta-section-bg">
+  <div class="max-w-4xl mx-auto px-6 md:px-10">
+    <div class="text-center reveal" id="cta-block"
+         style="background:white;border-radius:2rem;padding:4rem 3rem;position:relative;overflow:hidden">
+
+      <!-- Decorative blobs -->
+      <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:rgba(13,77,77,0.04);border-radius:50%;pointer-events:none"></div>
+      <div style="position:absolute;bottom:-40px;left:-40px;width:160px;height:160px;background:rgba(197,147,76,0.05);border-radius:50%;pointer-events:none"></div>
+
+      <span class="font-sans uppercase tracking-[0.22em] text-xs font-semibold block mb-4" style="color:var(--gold);position:relative;z-index:1">Dê o Primeiro Passo</span>
+      <h2 class="font-serif leading-tight mb-6" style="font-size:clamp(1.9rem,4.5vw,3.2rem);color:var(--primary);position:relative;z-index:1">
+        Pronta para dar o<br/>próximo passo com segurança?
+      </h2>
+      <p class="font-sans text-lg leading-relaxed mb-10 max-w-xl mx-auto" style="color:var(--on-muted);position:relative;z-index:1">
+        Não deixe que a dúvida impeça você de proteger o que é seu por direito. A Thais está pronta para te ouvir agora.
+      </p>
+      <a href="https://wa.me/5531988210020" target="_blank"
+         class="inline-flex items-center gap-3 font-sans font-bold text-lg px-10 py-5 rounded-full text-white transition-all hover:scale-105 duration-200"
+         style="background:#25D366;box-shadow:0 12px 36px rgba(37,211,102,0.32);position:relative;z-index:1">
+        <span class="material-symbols-outlined" style="font-size:1.2rem;font-variation-settings:'FILL' 1">chat</span>
+        Falar com Thais agora
+      </a>
+
+      <p class="font-sans text-xs mt-8" style="color:var(--on-muted);opacity:0.55;position:relative;z-index:1;letter-spacing:0.1em;text-transform:uppercase">
+        Atendimento Online · Todo o Brasil · Sede em Ipatinga MG
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FLOATING WHATSAPP
+═══════════════════════════════════════ -->
+<div class="float-wa">
+  <a href="https://wa.me/5531988210020" target="_blank" aria-label="Falar via WhatsApp">
+    <div class="wa-icon">
+      <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">chat</span>
+    </div>
+    <div class="wa-label">
+      <span style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;color:var(--on-muted);display:block;line-height:1.2">Atendimento</span>
+      <span style="font-size:0.9rem;font-weight:600;color:var(--primary);display:block">WhatsApp</span>
+    </div>
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer style="background:var(--surface-low)" class="py-12 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+    <div class="font-serif text-lg font-bold" style="color:var(--primary)">Thais de Freitas</div>
+
+    <div class="flex flex-wrap justify-center gap-8">
+      <a class="font-sans text-xs uppercase tracking-widest hover:opacity-100 transition-all" style="color:var(--on-muted);opacity:0.6" href="#">Política de Privacidade</a>
+      <a class="font-sans text-xs uppercase tracking-widest hover:opacity-100 transition-all" style="color:var(--on-muted);opacity:0.6" href="#">Termos de Uso</a>
+      <span class="font-sans text-xs uppercase tracking-widest" style="color:var(--on-muted);opacity:0.5">OAB · Thais de Freitas MG</span>
+    </div>
+
+    <div class="font-sans text-xs uppercase tracking-widest text-center md:text-right" style="color:var(--on-muted);opacity:0.5">
+      © 2025 Thais de Freitas. Advocacia para Mulheres.
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+  // Mobile menu toggle
+  function toggleMobile(){
+    const m=document.getElementById('mobile-menu');
+    m.classList.toggle('open');
+  }
+
+  // Scroll reveal observer
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.12});
+
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.stagger').forEach(el=>{
+    observer.observe(el);
+  });
+
+  // Nav active on scroll
+  const sections=document.querySelectorAll('section[id],header');
+  const navLinks=document.querySelectorAll('nav a[href^="#"]');
+  window.addEventListener('scroll',()=>{
+    let current='';
+    sections.forEach(s=>{
+      if(window.scrollY>=s.offsetTop-120) current=s.id;
+    });
+    navLinks.forEach(l=>{
+      l.classList.remove('nav-active');
+      if(l.getAttribute('href')==='#'+current) l.classList.add('nav-active');
+    });
+    // Nav shadow on scroll
+    const nav=document.getElementById('topnav');
+    if(window.scrollY>20){
+      nav.style.boxShadow='0 4px 24px rgba(13,77,77,0.07)';
+    } else {
+      nav.style.boxShadow='none';
+    }
+  },{passive:true});
+
+  // Trigger visible on load for hero elements
+  document.querySelectorAll('.reveal-left,.reveal-right').forEach(el=>el.classList.add('visible'));
+</script>
+</body>
+</html>
